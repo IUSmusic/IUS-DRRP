@@ -8,7 +8,6 @@ https://iusmusic.github.io/DRRPDEMO/
 If the app shows only text on a phone, the browser is usually not loading the css files.
 
 A portable, hi-res audio device that combines local playback, recording, and FM/DAB radio in a single tactile interface.
-What makes it unique is the combination of studio-oriented audio architecture, visible offline radio integration, and a retro-modern hardware interface engineered as a self-contained instrument rather than a generic consumer gadget.
 
 
 
