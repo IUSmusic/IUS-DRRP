@@ -1,0 +1,412 @@
+/* ══════════════════════════════════════════════
+   DISPLAYS.CSS — OLED panel, EQ bars, modes
+   IUS DRRP
+══════════════════════════════════════════════ */
+
+/* ── Display panel wrapper ── */
+.display-panel {
+  background: var(--oled-bg);
+  display: flex;
+  gap: 6px;
+  padding: 8px 10px;
+  border-bottom: 1px solid #1a1a1e;
+  border-top: 1px solid #0a0a0c;
+  position: relative;
+}
+
+.display-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+/* Scanline effect */
+.display-panel::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ── Individual display ── */
+.display {
+  background: var(--oled-dim);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #1a1c20;
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.5),
+    0 0 8px rgba(0,0,0,0.4);
+}
+
+.display-left {
+  width: 110px;
+  flex-shrink: 0;
+  min-height: 130px;
+}
+
+.display-right {
+  flex: 1;
+  min-height: 130px;
+}
+
+/* ── Mode views ── */
+.mode-view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  transition: opacity 0.3s ease;
+}
+
+.mode-view.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Album art ── */
+.album-art {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.art-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1a3a8a 0%, #8a1a5a 50%, #3a1a8a 100%);
+  animation: artShift 8s ease-in-out infinite alternate;
+}
+
+.art-label {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  background: rgba(0,0,0,0.65);
+  padding: 3px 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.format-badge {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--oled-cyan);
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+}
+
+.format-spec {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  color: rgba(255,255,255,0.5);
+}
+
+/* ── Time display ── */
+.time-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0 1px;
+  flex-shrink: 0;
+}
+
+.time-current {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--oled-text);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+
+.time-label {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.15em;
+  margin-top: 1px;
+}
+
+/* ── Progress bar ── */
+.progress-bar-wrap {
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: auto;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--oled-cyan), var(--oled-green));
+  border-radius: 2px;
+  transition: width 0.5s linear;
+  box-shadow: 0 0 6px var(--oled-cyan);
+}
+
+/* ── EQ bars (right display) ── */
+.track-info {
+  flex-shrink: 0;
+  margin-bottom: 4px;
+}
+
+.track-artist {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--oled-cyan);
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--oled-text);
+  letter-spacing: 0.05em;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 0 6px rgba(255,255,255,0.25);
+}
+
+.track-time {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.08em;
+}
+
+.eq-separator {
+  height: 1px;
+  background: rgba(255,255,255,0.07);
+  margin: 3px 0;
+  flex-shrink: 0;
+}
+
+/* EQ bars container */
+.eq-bars {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  padding-bottom: 1px;
+}
+
+.eq-bar {
+  flex: 1;
+  min-height: 4px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 1px 1px 0 0;
+  position: relative;
+  transition: height 0.08s ease-out;
+  box-shadow: 0 0 4px rgba(255,255,255,0.4);
+  will-change: height;
+}
+
+.eq-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0; right: 0;
+  height: 3px;
+  background: var(--oled-amber);
+  border-radius: 1px;
+  opacity: 0.8;
+  box-shadow: 0 0 3px var(--oled-amber);
+}
+
+.eq-labels {
+  display: flex;
+  gap: 3px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.eq-labels span {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 5px;
+  color: rgba(255,255,255,0.25);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* ── Radio mode left display ── */
+.radio-freq-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 4px 2px;
+  flex-shrink: 0;
+}
+
+.radio-band {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--oled-amber);
+  letter-spacing: 0.3em;
+  text-shadow: 0 0 6px var(--oled-amber);
+}
+
+.radio-freq {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--oled-text);
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 12px rgba(255,255,255,0.3);
+  line-height: 1.1;
+}
+
+/* Signal bars */
+.signal-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 24px;
+  padding: 0 8px;
+  margin: 4px 0;
+}
+
+.sig-bar {
+  width: 8px;
+  background: var(--oled-green);
+  border-radius: 1px;
+  box-shadow: 0 0 4px var(--oled-green);
+  transition: all 0.3s ease;
+}
+
+.radio-rds {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: var(--oled-cyan);
+  letter-spacing: 0.06em;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Radio scan bar ── */
+.radio-scan-display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.scan-bar-bg {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.scan-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--oled-amber), #ffda60);
+  border-radius: 2px;
+  box-shadow: 0 0 6px var(--oled-amber);
+  transition: width 0.5s ease;
+}
+
+.scan-label {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 7px;
+  color: rgba(255,255,255,0.25);
+}
+
+.preset-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 6px;
+}
+
+.preset-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.preset-dot.active {
+  background: var(--oled-amber);
+  box-shadow: 0 0 6px var(--oled-amber);
+}
+
+/* ── Record mode ── */
+.record-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 0 4px;
+  flex-shrink: 0;
+}
+
+.rec-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--oled-red);
+  box-shadow: 0 0 8px var(--oled-red);
+}
+
+.rec-icon.pulse {
+  animation: recPulse 1s ease-in-out infinite;
+}
+
+.rec-text {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--oled-red);
+  letter-spacing: 0.3em;
+  text-shadow: 0 0 8px var(--oled-red);
+}
+
+.record-level {
+  display: flex;
+  gap: 4px;
+  padding: 0 6px;
+  flex-shrink: 0;
+  height: 40px;
+  align-items: flex-end;
+}
+
+.vu-bar {
+  flex: 1;
+  border-radius: 2px;
+  background: linear-gradient(0deg, var(--oled-green) 60%, var(--oled-amber) 80%, var(--oled-red) 95%);
+  transition: height 0.05s linear;
+  transform-origin: bottom;
+}

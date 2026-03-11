@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IUS DRRP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/device.css">
+  <link rel="stylesheet" href="css/displays.css">
+  <link rel="stylesheet" href="css/controls.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+<div class="scene">
+  <div class="ambient-glow"></div>
+  <div class="grain-overlay"></div>
+  <div class="device" id="device">
+    <div class="side-accent left-side"></div>
+    <div class="side-knobs">
+      <div class="knob-wrap" id="knobVolume">
+        <div class="knob" data-knob="volume">
+          <div class="knob-notch"></div>
+        </div>
+        <span class="knob-label">VOLUME</span>
+      </div>
+      <div class="knob-wrap" id="knobTune">
+        <div class="knob" data-knob="tune">
+          <div class="knob-notch"></div>
+        </div>
+        <span class="knob-label">TUNE</span>
+      </div>
+    </div>
+    <div class="device-face">
+      <div class="brand-band">
+        <img class="brand-logo" src="assets/images/ius-official-logo.png" alt="IUS official logo">
+        <div class="brand-status">
+          <div class="status-dot rec" id="recDot" title="Recording"></div>
+          <div class="status-dot bat" id="batDot" title="Battery"></div>
+          <div class="status-dot sig" id="sigDot" title="Signal"></div>
+        </div>
+      </div>
+      <div class="display-panel">
+        <div class="display display-left" id="displayLeft">
+          <div class="mode-view" id="playerArt">
+            <div class="album-art">
+              <div class="art-gradient"></div>
+              <div class="art-label">
+                <span class="format-badge" id="formatBadge">Hi Res</span>
+                <span class="format-spec" id="formatSpec">49 32</span>
+              </div>
+            </div>
+            <div class="time-display">
+              <span class="time-current" id="timeCurrent">00:00</span>
+              <span class="time-label">Time</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+          </div>
+          <div class="mode-view hidden" id="radioArt">
+            <div class="radio-freq-display">
+              <div class="radio-band" id="radioBand">FM</div>
+              <div class="radio-freq" id="radioFreq">102.5</div>
+            </div>
+            <div class="signal-bars">
+              <div class="sig-bar" style="height:20%"></div>
+              <div class="sig-bar" style="height:40%"></div>
+              <div class="sig-bar" style="height:65%"></div>
+              <div class="sig-bar" style="height:90%"></div>
+              <div class="sig-bar" style="height:100%"></div>
+            </div>
+            <div class="radio-rds" id="radioRds">BBC Radio 6</div>
+            <div class="time-display">
+              <span class="time-current" id="radioTime">--:--</span>
+              <span class="time-label">Live</span>
+            </div>
+          </div>
+          <div class="mode-view hidden" id="recordArt">
+            <div class="record-indicator">
+              <div class="rec-icon pulse"></div>
+              <span class="rec-text">REC</span>
+            </div>
+            <div class="record-level">
+              <div class="vu-bar left-ch" id="vuLeft"></div>
+              <div class="vu-bar right-ch" id="vuRight"></div>
+            </div>
+            <div class="time-display">
+              <span class="time-current" id="recTime">00:00</span>
+              <span class="time-label">Record</span>
+            </div>
+          </div>
+        </div>
+        <div class="display display-right" id="displayRight">
+          <div class="mode-view" id="playerTrack">
+            <div class="track-info">
+              <div class="track-artist" id="trackArtist">IUS</div>
+              <div class="track-title" id="trackTitle">Track 04</div>
+              <div class="track-time" id="trackTime">(63:37)</div>
+            </div>
+            <div class="eq-separator"></div>
+            <div class="eq-bars" id="eqBars">
+              <div class="eq-bar" data-band="1"></div>
+              <div class="eq-bar" data-band="5"></div>
+              <div class="eq-bar" data-band="10"></div>
+              <div class="eq-bar" data-band="16"></div>
+              <div class="eq-bar" data-band="20"></div>
+              <div class="eq-bar" data-band="1k"></div>
+              <div class="eq-bar" data-band="4k"></div>
+              <div class="eq-bar" data-band="22"></div>
+              <div class="eq-bar" data-band="32"></div>
+              <div class="eq-bar" data-band="10k"></div>
+            </div>
+            <div class="eq-labels">
+              <span>1</span><span>5</span><span>10</span><span>16</span>
+              <span>20</span><span>1k</span><span>4k</span><span>22</span>
+              <span>32</span><span>10k</span>
+            </div>
+          </div>
+          <div class="mode-view hidden" id="radioTrack">
+            <div class="track-info">
+              <div class="track-artist" id="radioStation">BBC Radio 6</div>
+              <div class="track-title" id="radioNow">Now Playing</div>
+              <div class="track-time" id="radioSong">Florence and The Machine</div>
+            </div>
+            <div class="eq-separator"></div>
+            <div class="radio-scan-display">
+              <div class="scan-bar-bg">
+                <div class="scan-bar-fill" id="scanFill"></div>
+              </div>
+              <div class="scan-label">
+                <span>87.5</span><span id="scanFreqLabel">102.5</span><span>108.0</span>
+              </div>
+              <div class="preset-dots">
+                <div class="preset-dot active" data-preset="0"></div>
+                <div class="preset-dot" data-preset="1"></div>
+                <div class="preset-dot" data-preset="2"></div>
+                <div class="preset-dot" data-preset="3"></div>
+                <div class="preset-dot" data-preset="4"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mode-view hidden" id="recordTrack">
+            <div class="track-info">
+              <div class="track-artist">RECORDING</div>
+              <div class="track-title" id="recFilename">REC_001.FLAC</div>
+              <div class="track-time" id="recFormat">24 bit 48kHz</div>
+            </div>
+            <div class="eq-separator"></div>
+            <div class="eq-bars" id="eqBarsRec">
+              <div class="eq-bar" data-band="1"></div>
+              <div class="eq-bar" data-band="5"></div>
+              <div class="eq-bar" data-band="10"></div>
+              <div class="eq-bar" data-band="16"></div>
+              <div class="eq-bar" data-band="20"></div>
+              <div class="eq-bar" data-band="1k"></div>
+              <div class="eq-bar" data-band="4k"></div>
+              <div class="eq-bar" data-band="22"></div>
+              <div class="eq-bar" data-band="32"></div>
+              <div class="eq-bar" data-band="10k"></div>
+            </div>
+            <div class="eq-labels">
+              <span>1</span><span>5</span><span>10</span><span>16</span>
+              <span>20</span><span>1k</span><span>4k</span><span>22</span>
+              <span>32</span><span>10k</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vol-strip">
+        <span class="vol-label">VOL</span>
+        <div class="vol-track"><div class="vol-fill" id="volFill" style="width:62%"></div></div>
+        <span class="vol-val" id="volVal">62</span>
+      </div>
+      <div class="transport-row">
+        <button class="ctrl-btn" id="btnPrev" title="Previous">
+          <svg viewBox="0 0 24 24"><polygon points="19,20 9,12 19,4"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+        </button>
+        <button class="ctrl-btn play-btn" id="btnPlay" title="Play Pause">
+          <svg viewBox="0 0 24 24" id="playIcon"><polygon points="5,3 19,12 5,21"></polygon></svg>
+          <svg viewBox="0 0 24 24" id="pauseIcon" class="hidden"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+        </button>
+        <button class="ctrl-btn" id="btnPause" title="Pause" style="display:none"></button>
+        <button class="ctrl-btn" id="btnStop" title="Stop">
+          <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12"></rect></svg>
+        </button>
+        <button class="ctrl-btn" id="btnNext" title="Next">
+          <svg viewBox="0 0 24 24"><polygon points="5,4 15,12 5,20"></polygon><line x1="19" y1="5" x2="19" y2="19"></line></svg>
+        </button>
+      </div>
+      <div class="action-row">
+        <button class="mode-btn active" id="btnPlayer" data-mode="player">PLAYER</button>
+        <button class="mode-btn" id="btnRadio" data-mode="radio">RADIO</button>
+        <button class="mode-btn" id="btnRecord" data-mode="record">REC</button>
+        <button class="mode-btn eq-btn" id="btnEQ">EQ</button>
+      </div>
+      <div class="port-strip">
+        <div class="port usb-c" title="USB C">
+          <div class="port-hole"></div>
+          <span>USB C</span>
+        </div>
+        <div class="port microsd" title="microSD">
+          <div class="port-hole"></div>
+          <span>SD</span>
+        </div>
+        <div class="port phones" title="Headphone Out">
+          <div class="port-hole round"></div>
+          <span>3.5</span>
+        </div>
+        <div class="port lineout" title="Line Out">
+          <div class="port-hole round"></div>
+          <span>LINE</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="info-panel">
+    <img class="info-logo" src="assets/images/ius-official-logo.png" alt="IUS official logo">
+    <div class="info-tagline">IUS DRRP</div>
+    <div class="info-specs">
+      <span>HiFiBerry DAC ADC</span>
+      <span class="sep">·</span>
+      <span>256x64 OLED</span>
+      <span class="sep">·</span>
+      <span>FLAC 24 bit 48kHz</span>
+      <span class="sep">·</span>
+      <span>FM DAB Radio</span>
+      <span class="sep">·</span>
+      <span>Pi 4 2GB</span>
+    </div>
+  </div>
+</div>
+<div class="eq-overlay hidden" id="eqOverlay">
+  <div class="eq-panel">
+    <div class="eq-title">EQUALISER</div>
+    <div class="eq-controls" id="eqControls"></div>
+    <div class="eq-presets">
+      <button class="eq-preset active" data-preset="flat">FLAT</button>
+      <button class="eq-preset" data-preset="bass">BASS</button>
+      <button class="eq-preset" data-preset="vocal">VOCAL</button>
+      <button class="eq-preset" data-preset="air">AIR</button>
+      <button class="eq-preset" data-preset="warm">WARM</button>
+    </div>
+    <button class="eq-close" id="eqClose">CLOSE</button>
+  </div>
+</div>
+<script src="js/knobs.js"></script>
+<script src="js/eq.js"></script>
+<script src="js/player.js"></script>
+<script src="js/radio.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

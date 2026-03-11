@@ -1,0 +1,161 @@
+/* ══════════════════════════════════════════════
+   ANIMATIONS.CSS — All keyframes and transitions
+   IUS DRRP
+══════════════════════════════════════════════ */
+
+/* Device entrance */
+@keyframes deviceEnter {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+    filter: drop-shadow(0 0px 0px rgba(0,0,0,0));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter:
+      drop-shadow(0 30px 60px rgba(0,0,0,0.7))
+      drop-shadow(0 8px 20px rgba(0,0,0,0.5))
+      drop-shadow(0 0 80px rgba(255,52,68,0.08));
+  }
+}
+
+/* Info panel fade up */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Art gradient shift */
+@keyframes artShift {
+  0%   { background: linear-gradient(135deg, #1a3a8a 0%, #8a1a5a 50%, #3a1a8a 100%); }
+  33%  { background: linear-gradient(135deg, #1a5a3a 0%, #5a1a8a 50%, #8a5a1a 100%); }
+  66%  { background: linear-gradient(135deg, #5a3a1a 0%, #1a5a8a 50%, #8a1a3a 100%); }
+  100% { background: linear-gradient(135deg, #1a3a8a 0%, #8a1a5a 50%, #3a1a8a 100%); }
+}
+
+/* Record pulse */
+@keyframes recPulse {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 8px var(--oled-red); }
+  50%       { opacity: 0.3; box-shadow: 0 0 2px var(--oled-red); }
+}
+
+/* EQ panel slide in */
+@keyframes panelIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Tick/highlight flash on button press */
+@keyframes btnFlash {
+  0%   { box-shadow: 0 0 0 2px var(--oled-cyan); }
+  100% { box-shadow: 0 0 0 0px transparent; }
+}
+
+/* Knob turn */
+@keyframes knobTurn {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Scan animation for radio tuning */
+@keyframes radioScan {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Signal bar flicker for weak signal */
+@keyframes sigFlicker {
+  0%, 100% { opacity: 1; }
+  30%       { opacity: 0.6; }
+  60%       { opacity: 0.9; }
+}
+
+/* Status dot breathing */
+@keyframes dotBreathe {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+.status-dot.bat.active {
+  animation: dotBreathe 3s ease-in-out infinite;
+}
+
+/* Scrolling track title for long text */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  20%  { transform: translateX(0); }
+  80%  { transform: translateX(calc(-100% + 120px)); }
+  100% { transform: translateX(0); }
+}
+
+.track-title.scrolling {
+  animation: marquee 6s ease-in-out infinite;
+}
+
+/* Mode transition — display cross-fade already in mode-view via CSS */
+/* Additional glow pulse on active mode */
+@keyframes modePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(48,232,255,0.3); }
+  70%  { box-shadow: 0 0 0 6px rgba(48,232,255,0); }
+  100% { box-shadow: 0 0 0 0 rgba(48,232,255,0); }
+}
+
+.mode-btn.active {
+  animation: modePulse 2s ease-out;
+}
+
+/* VU meter movement */
+@keyframes vuLeft {
+  0%   { height: 20%; }
+  10%  { height: 70%; }
+  20%  { height: 45%; }
+  30%  { height: 85%; }
+  40%  { height: 60%; }
+  50%  { height: 35%; }
+  60%  { height: 78%; }
+  70%  { height: 52%; }
+  80%  { height: 90%; }
+  90%  { height: 40%; }
+  100% { height: 20%; }
+}
+
+@keyframes vuRight {
+  0%   { height: 30%; }
+  10%  { height: 55%; }
+  20%  { height: 80%; }
+  30%  { height: 40%; }
+  40%  { height: 72%; }
+  50%  { height: 90%; }
+  60%  { height: 48%; }
+  70%  { height: 65%; }
+  80%  { height: 30%; }
+  90%  { height: 75%; }
+  100% { height: 30%; }
+}
+
+.vu-bar.left-ch.active  { animation: vuLeft  2.1s linear infinite; }
+.vu-bar.right-ch.active { animation: vuRight 1.9s linear infinite; }
+
+/* Hover glow on device */
+.device:hover {
+  filter:
+    drop-shadow(0 35px 70px rgba(0,0,0,0.75))
+    drop-shadow(0 8px 20px rgba(0,0,0,0.5))
+    drop-shadow(0 0 100px rgba(48,232,255,0.1));
+  transition: filter 0.6s ease;
+}
+
+/* Subtle reflection sheen on device face */
+.device-face::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg,
+    rgba(255,255,255,0.08) 0%,
+    transparent 100%);
+  pointer-events: none;
+  z-index: 20;
+}

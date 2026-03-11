@@ -1,0 +1,20 @@
+IUS DRRP project structure
+
+index.html
+README.txt
+FOLDER_STRUCTURE.txt
+HOSTING_NOTES.txt
+css
+  animations.css
+  controls.css
+  device.css
+  displays.css
+js
+  eq.js
+  knobs.js
+  main.js
+  player.js
+  radio.js
+assets
+  images
+    ius-official-logo.png

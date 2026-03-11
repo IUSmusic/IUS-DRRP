@@ -1,0 +1,370 @@
+/* ══════════════════════════════════════════════
+   DEVICE.CSS — Shell, scene, body
+   IUS DRRP
+══════════════════════════════════════════════ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --metal-light:   #d8d8d8;
+  --metal-mid:     #b0b2b5;
+  --metal-dark:    #7a7c80;
+  --metal-edge:    #4a4c50;
+  --chrome-hi:     #e8eaec;
+  --chrome-lo:     #888b90;
+
+  --oled-bg:       #080808;
+  --oled-dim:      #111114;
+  --oled-text:     #f0f2f0;
+  --oled-green:    #4cff88;
+  --oled-amber:    #ffb830;
+  --oled-cyan:     #30e8ff;
+  --oled-red:      #ff3444;
+  --oled-blue:     #3070ff;
+
+  --accent:        #ff3444;
+  --accent2:       #30e8ff;
+
+  --btn-face:      #c4c6c9;
+  --btn-shadow:    #888a8e;
+  --btn-hi:        #e4e6e9;
+
+  --font-display:  'Orbitron', 'Share Tech Mono', monospace;
+  --font-mono:     'Share Tech Mono', monospace;
+  --font-ui:       'Rajdhani', sans-serif;
+}
+
+html, body {
+  width: 100%; height: 100%;
+  overflow-x: hidden;
+  background: #0a0a0c;
+}
+
+body {
+  font-family: var(--font-ui);
+  color: var(--oled-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* ── Scene backdrop ── */
+.scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 60px 20px 80px;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 40%, #1a1018 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 30% 80%, #0a0f1a 0%, transparent 60%),
+    #0a0a0c;
+}
+
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 500px 300px at 50% 45%, rgba(255,52,68,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 400px at 20% 70%, rgba(48,232,255,0.04) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 256px;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+}
+
+/* ── Device outer wrapper ── */
+.device {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  width: 340px;
+  filter:
+    drop-shadow(0 30px 60px rgba(0,0,0,0.7))
+    drop-shadow(0 8px 20px rgba(0,0,0,0.5))
+    drop-shadow(0 0 80px rgba(255,52,68,0.08));
+  animation: deviceEnter 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Left side accent ── */
+.side-accent {
+  width: 8px;
+  background: linear-gradient(180deg,
+    var(--chrome-hi) 0%,
+    var(--metal-mid) 30%,
+    var(--metal-dark) 70%,
+    var(--metal-edge) 100%);
+  border-radius: 10px 0 0 10px;
+  box-shadow: inset 1px 0 2px rgba(255,255,255,0.3),
+              -1px 0 4px rgba(0,0,0,0.4);
+}
+
+/* ── Right side knobs ── */
+.side-knobs {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 4px 28px 0;
+  background: linear-gradient(180deg,
+    var(--metal-mid) 0%,
+    var(--metal-dark) 50%,
+    var(--metal-edge) 100%);
+  border-radius: 0 10px 10px 0;
+  width: 58px;
+  box-shadow:
+    inset -1px 0 3px rgba(255,255,255,0.15),
+    2px 0 8px rgba(0,0,0,0.4);
+}
+
+.knob-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.knob {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 40% at 35% 30%, rgba(255,255,255,0.35) 0%, transparent 60%),
+    conic-gradient(from 0deg,
+      #585a5e, #9a9da2, #c8cacc, #9a9da2,
+      #6a6c70, #585a5e, #9a9da2, #c8cacc,
+      #9a9da2, #585a5e);
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.6),
+    0 1px 3px rgba(0,0,0,0.4),
+    inset 0 1px 2px rgba(255,255,255,0.2);
+  transition: transform 0.1s ease;
+}
+
+.knob:active { transform: scale(0.97); }
+
+.knob-notch {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 9px;
+  background: rgba(0,0,0,0.8);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(255,255,255,0.1);
+}
+
+.knob-label {
+  font-family: var(--font-mono);
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+}
+
+/* ── Device face (main body) ── */
+.device-face {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: linear-gradient(175deg,
+    #cfd1d4 0%,
+    #b8babd 15%,
+    #a8aaad 40%,
+    #989a9d 60%,
+    #888a8d 80%,
+    #787a7d 100%);
+  border-radius: 12px 0 0 12px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.3);
+  border-left: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+  box-shadow:
+    inset 1px 0 1px rgba(255,255,255,0.4),
+    inset 0 1px 1px rgba(255,255,255,0.3);
+
+  /* Brushed metal texture via repeating gradient */
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.015) 2px,
+      rgba(255,255,255,0.015) 4px
+    ),
+    linear-gradient(175deg,
+      #cfd1d4 0%,
+      #b8babd 15%,
+      #a8aaad 40%,
+      #989a9d 60%,
+      #888a8d 80%,
+      #787a7d 100%);
+}
+
+/* ── Brand band (top) ── */
+.brand-band {
+  background: var(--oled-bg);
+  padding: 12px 16px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #1a1a1e;
+  position: relative;
+}
+
+.brand-band::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 60%, rgba(48,232,255,0.03) 100%);
+  pointer-events: none;
+}
+
+.brand-logo {
+  display: block;
+  width: 150px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.08));
+}
+
+.info-logo {
+  display: block;
+  width: 180px;
+  max-width: 72vw;
+  height: auto;
+  margin: 0 auto 10px;
+  opacity: 0.95;
+}
+
+.brand-status {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #2a2a2e;
+  transition: all 0.3s ease;
+}
+
+.status-dot.rec.active  { background: var(--oled-red);   box-shadow: 0 0 6px var(--oled-red); }
+.status-dot.bat.active  { background: var(--oled-green);  box-shadow: 0 0 6px var(--oled-green); }
+.status-dot.sig.active  { background: var(--oled-cyan);   box-shadow: 0 0 6px var(--oled-cyan); }
+
+/* ── Volume strip ── */
+.vol-strip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background: #101012;
+}
+
+.vol-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+
+.vol-track {
+  flex: 1;
+  height: 3px;
+  background: #1e1e22;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.vol-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--oled-green), var(--oled-cyan));
+  border-radius: 2px;
+  transition: width 0.1s ease;
+}
+
+.vol-val {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  color: rgba(255,255,255,0.4);
+  width: 18px;
+  text-align: right;
+}
+
+/* ── Info panel ── */
+.info-panel {
+  z-index: 10;
+  margin-top: 40px;
+  text-align: center;
+  animation: fadeUp 1s 0.5s both;
+}
+
+.info-brand {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 6px;
+}
+
+.info-tagline {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+}
+
+.info-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: 0.05em;
+}
+
+.info-specs .sep {
+  margin: 0 6px;
+  opacity: 0.4;
+}
+
+/* ── Responsiveness ── */
+@media (max-width: 420px) {
+  .device { width: min(300px, 100%); }
+  .brand-logo { width: 118px; }
+  .info-logo { width: 150px; }
+}
+
+body { overflow-x: hidden; }
+.scene { max-width: 100vw; padding-left: 12px; padding-right: 12px; }
