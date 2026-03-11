@@ -1,4 +1,4 @@
-IUS DRRP Web App
+IUS DRRP Prototype Demo
 
 
 If the app shows only text on a phone, the browser is usually not loading the css files.
