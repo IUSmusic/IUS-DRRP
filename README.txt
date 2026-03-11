@@ -1,5 +1,8 @@
 IUS DRRP Prototype Demo
 
+Standalone HTML Preview:
+https://iusmusic.github.io/DRRPDEMO/
+
 
 If the app shows only text on a phone, the browser is usually not loading the css files.
 
